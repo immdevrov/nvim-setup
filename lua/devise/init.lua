@@ -1,2 +1,2 @@
-require('devise.remap')
-require('devise.set')
+require("devise.remap")
+require("devise.set")
