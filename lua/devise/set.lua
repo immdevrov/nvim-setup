@@ -28,3 +28,6 @@ vim.wo.signcolumn = 'yes'
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
