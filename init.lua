@@ -116,36 +116,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = vim.fn.expand '$MYVIMRC',
 })
 
--- [[ Setting options ]]
--- See `:help vim.o`
 
--- Set highlight on search
-vim.o.hlsearch = true
-vim.o.incsearch = true
-
-vim.opt.relativenumber = true
-vim.opt.nu = true
-vim.o.foldmethod = 'syntax'
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-vim.o.cmdheight = 0
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
-
--- Set colorscheme
-vim.o.termguicolors = true
 vim.cmd('colorscheme kanagawa-dragon')
 
 require('gitblame').setup {
