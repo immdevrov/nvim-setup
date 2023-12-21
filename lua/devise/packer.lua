@@ -33,6 +33,12 @@ require('packer').startup(function(use)
     }
   }
 
+  use {
+    'prettier/vim-prettier',
+    run = 'yarn install --frozen-lockfile --production',
+    ft = { 'javascript', 'vue', 'json', 'typescript' }
+  }
+
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
@@ -57,6 +63,7 @@ require('packer').startup(function(use)
   -- Themes
   use 'ribru17/bamboo.nvim'
   use 'rebelot/kanagawa.nvim'
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   use {
     'nvim-lualine/lualine.nvim', -- Fancier statusline
