@@ -64,6 +64,9 @@ require('packer').startup(function(use)
   use 'ribru17/bamboo.nvim'
   use 'rebelot/kanagawa.nvim'
   use { "catppuccin/nvim", as = "catppuccin" }
+  use 'ramojus/mellifluous.nvim'
+  use 'sainnhe/gruvbox-material'
+  use 'morhetz/gruvbox'
 
   use {
     'nvim-lualine/lualine.nvim', -- Fancier statusline
@@ -81,7 +84,6 @@ require('packer').startup(function(use)
 
   use 'ThePrimeagen/harpoon'
 
-  use 'folke/which-key.nvim'
 
   use 'akinsho/toggleterm.nvim'
 
