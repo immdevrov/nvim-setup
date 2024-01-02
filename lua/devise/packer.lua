@@ -84,9 +84,6 @@ require('packer').startup(function(use)
 
   use 'ThePrimeagen/harpoon'
 
-
-  use 'akinsho/toggleterm.nvim'
-
   if is_bootstrap then
     require('packer').sync()
   end
