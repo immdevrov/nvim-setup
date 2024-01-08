@@ -32,6 +32,7 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 
+local conf = require('telescope.config').values
 -- See `:help telescope.builtin`
 local function project_search()
   pcall(vim.cmd.write)
@@ -47,6 +48,7 @@ local function grep_search()
   pcall(vim.cmd.write)
   require('telescope.builtin').live_grep {
     shorten_path = true,
+    vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
     layout_strategy = "vertical",
   }
 
