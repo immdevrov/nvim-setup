@@ -7,7 +7,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
--- todo: figure out what this keymap do
+-- find and replace
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Diagnostic keymaps
@@ -19,7 +19,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('n', '<leader>\\', ':noh<CR>')
 vim.keymap.set('n', '<C-s>', vim.cmd.wall)
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 
@@ -29,5 +28,5 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 
 vim.keymap.set("x", "<leader>P", "\"_dP")
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
