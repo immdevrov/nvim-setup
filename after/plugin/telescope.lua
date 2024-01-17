@@ -12,6 +12,8 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ["<C-k>"] = require('telescope.actions').cycle_history_next,
+        ["<C-j>"] = require('telescope.actions').cycle_history_prev,
       },
     },
   },
@@ -69,12 +71,16 @@ local function current_file_word()
   }
 end
 
-vim.keymap.set('n', '<leader>sf', project_search, { desc = '[S]earch [F]iles' })
+local function lastSearch()
+  require('telescope.builtin').resume()
+end
+
+vim.keymap.set('n', '<leader>sf', project_search, { desc = '[S]ejrch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', word_search, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', grep_search, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', current_file_word, { desc = '[/] Fuzzily search in current buffer]' })
+vim.keymap.set('n', '<leader>sl', lastSearch, { desc = 'Resume with [L]ast search' })
 
