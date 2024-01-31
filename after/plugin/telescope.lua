@@ -17,6 +17,23 @@ require('telescope').setup {
       },
     },
   },
+  vimgrep_arguments = {
+    "rg",
+    "--with-filename",
+    "--line-number",
+    "--column",
+    "--ignore-case",
+    "--trim"   -- add this value
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "ignore_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  },
   pickers = {
     find_files = {
       -- theme = "dropdown",
@@ -53,12 +70,11 @@ local function grep_search()
     vimgrep_arguments = table.insert(conf.vimgrep_arguments, '--fixed-strings'),
     layout_strategy = "vertical",
   }
-
 end
 
 local function word_search()
   pcall(vim.cmd.write)
-  require('telescope.builtin').grep_string{
+  require('telescope.builtin').grep_string {
     shorten_path = true,
     layout_strategy = "vertical",
   }
@@ -83,4 +99,3 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', current_file_word, { desc = '[/] Fuzzily search in current buffer]' })
 vim.keymap.set('n', '<leader>sl', lastSearch, { desc = 'Resume with [L]ast search' })
-
