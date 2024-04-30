@@ -19,6 +19,7 @@ require('packer').startup(function(use)
 
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
+      -- 'folke/zen-mode.nvim',
     },
   }
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])

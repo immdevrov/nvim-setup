@@ -1,3 +1,4 @@
+
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -8,6 +9,8 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
@@ -43,11 +46,20 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  tsserver = {},
-  cssls = {},
-  volar = {
-    filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json',  }
+  tsserver = {
+    init_options = {
+      plugins = {
+        {
+          name = '@vue/typescript-plugin',
+          location = '/opt/homebrew/lib/@vue/typescript-plugin@2.0.14',
+          languages = {"javascript", "typescript", "vue"},
+        },
+      },
+    },
+    filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', },
   },
+  cssls = {},
+  volar = {},
 }
 
 -- Setup neovim lua configuration
@@ -75,6 +87,24 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
     }
   end,
+}
+
+-- todo: since 2.0.0 vue plugin introduced Hybrid mode which breake compat with mason
+require'lspconfig'.tsserver.setup{
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = '/opt/homebrew/lib/@vue/typescript-plugin@2.0.14',
+        languages = {"javascript", "typescript", "vue"},
+      },
+    },
+  },
+  filetypes = {
+    "javascript",
+    "typescript",
+    "vue",
+  },
 }
 
 -- nvim-cmp setup
