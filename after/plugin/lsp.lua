@@ -60,6 +60,7 @@ local servers = {
   },
   cssls = {},
   volar = {},
+  lua_ls = {},
 }
 
 -- Setup neovim lua configuration
@@ -105,6 +106,8 @@ require'lspconfig'.tsserver.setup{
     "typescript",
     "vue",
   },
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 -- nvim-cmp setup
