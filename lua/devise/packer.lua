@@ -63,6 +63,7 @@ require('packer').startup(function(use)
   use 'ramojus/mellifluous.nvim'
   use 'sainnhe/gruvbox-material'
   use 'morhetz/gruvbox'
+  use 'github/copilot.vim'
 
   use {
     'nvim-lualine/lualine.nvim', -- Fancier statusline
