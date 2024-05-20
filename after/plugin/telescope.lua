@@ -99,3 +99,4 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', current_file_word, { desc = '[/] Fuzzily search in current buffer]' })
 vim.keymap.set('n', '<leader>sl', lastSearch, { desc = 'Resume with [L]ast search' })
+vim.keymap.set('n', '<C-k><C-t>', require('telescope.builtin').colorscheme, { desc = 'Change colorscheme' })

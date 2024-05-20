@@ -64,6 +64,11 @@ require('packer').startup(function(use)
   use 'sainnhe/gruvbox-material'
   use 'morhetz/gruvbox'
   use 'github/copilot.vim'
+  use 'jorengarenar/vim-darkness'
+  use { 'fxn/vim-monochrome' }
+  use 'andreypopp/vim-colors-plain'
+  use 'L-Colombo/atlantic-dark.nvim'
+  use 'sdothum/vim-colors-duochrome'
 
   use {
     'nvim-lualine/lualine.nvim', -- Fancier statusline
