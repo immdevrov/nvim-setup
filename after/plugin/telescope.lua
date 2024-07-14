@@ -16,6 +16,8 @@ require('telescope').setup {
         ["<C-j>"] = require('telescope.actions').cycle_history_prev,
       },
     },
+    prompt_prefix = " 󰼛 ",
+    selection_caret = " 󱞩 ",
   },
   vimgrep_arguments = {
     "rg",
