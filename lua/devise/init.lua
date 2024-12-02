@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- vim.api.nvim_command('autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js,*.vue EslintFixAll')
+vim.api.nvim_command('autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js,*.vue Prettier')
 
 vim.api.nvim_create_user_command('W', function ()
   vim.cmd.wall()

@@ -108,34 +108,15 @@ require'lspconfig'.ts_ls.setup{
   capabilities = capabilities,
 }
 
--- mason_lspconfig.setup_handlers {
---   function(server_name)
---     require('lspconfig')[server_name].setup {
---       capabilities = capabilities,
---       on_attach = on_attach,
---     }
---   end,
---   ['tsserver'] = function ()
---     require'lspconfig'.tsserver.setup{
---       init_options = {
---         plugins = {
---           {
---             name = "@vue/typescript-plugin",
---             location = '/opt/homebrew/lib/@vue/typescript-plugin@2.0.14',
---             languages = {"javascript", "typescript", "vue"},
---           },
---         },
---       },
---       filetypes = {
---         "javascript",
---         "typescript",
---         "vue",
---       },
---       capabilities = capabilities,
---       on_attach = on_attach,
---     }
---   end,
--- }
+require'lspconfig'.eslint.setup({
+  on_attach = function(_client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+  capabilities = capabilities,
+})
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
