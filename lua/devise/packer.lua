@@ -18,6 +18,7 @@ require('packer').startup(function(use)
     },
   }
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+  use "nvim-lua/plenary.nvim"
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -56,16 +57,12 @@ require('packer').startup(function(use)
   use 'ramojus/mellifluous.nvim'
   use 'morhetz/gruvbox'
   use 'sdothum/vim-colors-duochrome'
-  use {
-    'zenbones-theme/zenbones.nvim',
-    dependencies = 'rktjmp/lush.nvim',
-    lazy = false,
-    priority = 1000,
-  }
+  use "abeldekat/harpoonline"
 
   use {
     'nvim-lualine/lualine.nvim', -- Fancier statusline
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    dependencies =  { "abeldekat/harpoonline", version = "*" },
   }
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
@@ -79,7 +76,11 @@ require('packer').startup(function(use)
 
   use 'mrloop/telescope-git-branch.nvim'
 
-  use 'ThePrimeagen/harpoon'
+  use {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    requires = { {"nvim-lua/plenary.nvim"} }
+}
 
 
   if is_bootstrap then

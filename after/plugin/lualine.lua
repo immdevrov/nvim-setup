@@ -1,5 +1,10 @@
--- See `:help lualine.txt`
-require('lualine').setup {
+local harpoonline = require("harpoonline")
+local lualine = require("lualine")
+harpoonline.setup({
+  on_update = function() require("lualine").refresh() end,
+})
+
+lualine.setup {
   options = {
     icons_enabled = true,
     component_separators = '|',
@@ -7,7 +12,8 @@ require('lualine').setup {
     globalstatus = true,
   },
   sections = {
-    lualine_b = { {'b:gitsigns_head', icon = ''}, },
+    lualine_a = { {'b:gitsigns_head', icon = ''}, },
+    lualine_b = { harpoonline.format },
     lualine_c = {
       {
         'filename',
