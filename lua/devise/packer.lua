@@ -13,9 +13,6 @@ require('packer').startup(function(use)
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
-      -- Automatically install LSPs to stdpath for neovim
-
-      -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
       -- 'folke/zen-mode.nvim',
     },
@@ -23,7 +20,7 @@ require('packer').startup(function(use)
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
   use {
-  "nvim-neo-tree/neo-tree.nvim",
+    "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     requires = {
       "nvim-lua/plenary.nvim",
@@ -55,26 +52,24 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   -- Themes
-  use 'ribru17/bamboo.nvim'
-  use 'rebelot/kanagawa.nvim'
   use { "catppuccin/nvim", as = "catppuccin" }
   use 'ramojus/mellifluous.nvim'
-  use 'sainnhe/gruvbox-material'
   use 'morhetz/gruvbox'
-  use 'github/copilot.vim'
-  use 'jorengarenar/vim-darkness'
-  use { 'fxn/vim-monochrome' }
-  use 'andreypopp/vim-colors-plain'
-  use 'L-Colombo/atlantic-dark.nvim'
   use 'sdothum/vim-colors-duochrome'
+  use {
+    'zenbones-theme/zenbones.nvim',
+    dependencies = 'rktjmp/lush.nvim',
+    lazy = false,
+    priority = 1000,
+  }
 
   use {
     'nvim-lualine/lualine.nvim', -- Fancier statusline
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
+  use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -82,12 +77,14 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+  use 'mrloop/telescope-git-branch.nvim'
+
   use 'ThePrimeagen/harpoon'
+
 
   if is_bootstrap then
     require('packer').sync()
   end
-
 end)
 
 -- When we are bootstrapping a configuration, it doesn't
