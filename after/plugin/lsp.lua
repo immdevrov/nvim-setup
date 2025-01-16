@@ -88,6 +88,8 @@ require'lspconfig'.ts_ls.setup{
     "javascript",
     "typescript",
     "vue",
+    "javascriptreact",
+    "typescriptreact",
   },
   on_attach = on_attach,
   capabilities = capabilities,
