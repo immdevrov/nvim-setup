@@ -3,12 +3,13 @@ vim.o.incsearch = true
 
 vim.opt.relativenumber = true
 vim.opt.nu = true
-vim.o.foldmethod = 'syntax'
+vim.o.foldmethod = 'expr'
+vim.opt.foldtext = [[v:lua.vim.treesitter.foldtext()]]
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
 vim.opt.wrap = false
-
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -31,7 +32,6 @@ vim.opt.scrolloff = 8
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-
 
 vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character

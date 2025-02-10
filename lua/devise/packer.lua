@@ -17,7 +17,6 @@ require('packer').startup(function(use)
       -- 'folke/zen-mode.nvim',
     },
   }
-  vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
   use "nvim-lua/plenary.nvim"
 
   use {
@@ -29,11 +28,12 @@ require('packer').startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
+  vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
   use {
     'prettier/vim-prettier',
     run = 'yarn install --frozen-lockfile --production',
-    ft = { 'javascript', 'vue', 'json', 'typescript' }
+    ft = { 'javascript', 'vue', 'json', 'typescript', 'typescriptreact', 'javascriptreact' }
   }
 
   use { -- Autocompletion
@@ -57,12 +57,20 @@ require('packer').startup(function(use)
   use 'ramojus/mellifluous.nvim'
   use 'morhetz/gruvbox'
   use 'sdothum/vim-colors-duochrome'
+  use "dgox16/oldworld.nvim"
+
+  use {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    requires = { { "nvim-lua/plenary.nvim" } }
+  }
+
   use "abeldekat/harpoonline"
 
   use {
     'nvim-lualine/lualine.nvim', -- Fancier statusline
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    dependencies =  { "abeldekat/harpoonline", version = "*" },
+    dependencies = { "abeldekat/harpoonline", version = "*" },
   }
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
@@ -75,13 +83,6 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
   use 'mrloop/telescope-git-branch.nvim'
-
-  use {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    requires = { {"nvim-lua/plenary.nvim"} }
-}
-
 
   if is_bootstrap then
     require('packer').sync()

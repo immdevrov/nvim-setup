@@ -5,6 +5,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = { 'lua', 'typescript', 'vimdoc', 'javascript', 'vue', 'css', },
   highlight = { enable = true },
   indent = { enable = true },
+  
   incremental_selection = {
     enable = false,
     keymaps = {

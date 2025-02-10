@@ -14,13 +14,14 @@ vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('n', '<leader>\\', ':noh<CR>')
 vim.keymap.set('n', '<C-s>', vim.cmd.wall)
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", '<leader>on', vim.cmd.on)
+vim.keymap.set("n", '<leader>q', vim.cmd.copen)
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
