@@ -33,8 +33,9 @@ require('packer').startup(function(use)
   use {
     'prettier/vim-prettier',
     run = 'yarn install --frozen-lockfile --production',
-    ft = { 'javascript', 'vue', 'json', 'typescript', 'typescriptreact', 'javascriptreact' }
+    ft = { 'javascript', 'vue', 'json', 'typescript', 'typescriptreact', 'javascriptreact' },
   }
+
 
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -54,10 +55,7 @@ require('packer').startup(function(use)
 
   -- Themes
   use { "catppuccin/nvim", as = "catppuccin" }
-  use 'ramojus/mellifluous.nvim'
-  use 'morhetz/gruvbox'
-  use 'sdothum/vim-colors-duochrome'
-  use "dgox16/oldworld.nvim"
+  use 'ramojus/mellifluous.nvim' -- white theme
 
   use {
     "ThePrimeagen/harpoon",

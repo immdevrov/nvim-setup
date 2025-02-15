@@ -36,11 +36,11 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require'lspconfig'.lua_ls.setup {
+require 'lspconfig'.lua_ls.setup {
   on_init = function(client)
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
-      if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+      if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
         return
       end
     end
@@ -63,39 +63,53 @@ require'lspconfig'.lua_ls.setup {
     Lua = {
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { 'vim' },
       },
     },
   }
 }
 
-require'lspconfig'.volar.setup{
+require 'lspconfig'.volar.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  init_options = {
+      typescript = {
+        tsdk = '/home/devise/.local/share/nvm/v22.11.0/lib/node_modules/typescript/lib'
+      }
+    },
+    on_new_config = function(new_config, new_root_dir)
+      local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
+      if lib_path then
+        new_config.init_options.typescript.tsdk = lib_path
+      end
+    end
+
 }
 
-require'lspconfig'.ts_ls.setup{
+require 'lspconfig'.ts_ls.setup {
   init_options = {
     plugins = {
       {
         name = "@vue/typescript-plugin",
         location = "/home/devise/.local/share/nvm/v22.11.0/lib/node_modules/@vue/typescript-plugin",
-        languages = {"javascript", "typescript", "vue"},
+        languages = { "javascript", "typescript", "vue" },
       },
     },
   },
   filetypes = {
-    "javascript",
-    "typescript",
     "vue",
-    "javascriptreact",
-    "typescriptreact",
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
   },
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-require'lspconfig'.eslint.setup({
+require 'lspconfig'.eslint.setup({
   on_attach = function(_client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
@@ -109,7 +123,7 @@ require'lspconfig'.eslint.setup({
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup {
   snippet = {
