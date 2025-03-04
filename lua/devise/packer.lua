@@ -14,9 +14,10 @@ require('packer').startup(function(use)
     'neovim/nvim-lspconfig',
     requires = {
       'folke/neodev.nvim',
-      -- 'folke/zen-mode.nvim',
+      '',
     },
   }
+  use 'folke/zen-mode.nvim'
   use "nvim-lua/plenary.nvim"
 
   use {
@@ -55,7 +56,14 @@ require('packer').startup(function(use)
 
   -- Themes
   use { "catppuccin/nvim", as = "catppuccin" }
-  use 'ramojus/mellifluous.nvim' -- white theme
+  use {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  }
+  use "sainnhe/everforest"
+  use "EdenEast/nightfox.nvim"
 
   use {
     "ThePrimeagen/harpoon",

@@ -68,31 +68,56 @@ require 'lspconfig'.lua_ls.setup {
     },
   }
 }
+local npm_root = vim.fn.trim(vim.fn.system('npm root -g'))
 
 require 'lspconfig'.volar.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
-      typescript = {
-        tsdk = '/home/devise/.local/share/nvm/v22.11.0/lib/node_modules/typescript/lib'
-      }
-    },
-    on_new_config = function(new_config, new_root_dir)
-      local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
-      if lib_path then
-        new_config.init_options.typescript.tsdk = lib_path
-      end
+    typescript = {
+      tsdk = npm_root .. '/typescript/lib'
+    }
+  },
+  on_new_config = function(new_config, new_root_dir)
+    local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
+    if lib_path then
+      new_config.init_options.typescript.tsdk = lib_path
     end
+  end
 
 }
+
+local function ensure_npm_package(package_name, npm_root)
+  -- Check if package is installed
+  local package_path = npm_root .. '/' .. package_name
+  if vim.fn.isdirectory(package_path) == 0 then
+    -- Install package if missing
+    local install_cmd = 'npm install -g ' .. package_name
+    vim.notify('Installing ' .. package_name .. ' globally...', vim.log.levels.INFO)
+
+    local success, result = pcall(vim.fn.system, install_cmd)
+    if not success or vim.v.shell_error ~= 0 then
+      vim.notify('Failed to install ' .. package_name .. ': ' .. (result or ''), vim.log.levels.ERROR)
+      return nil
+    end
+
+    -- Verify installation after attempt
+    if vim.fn.isdirectory(package_path) == 0 then
+      vim.notify(package_name .. ' installation failed', vim.log.levels.ERROR)
+      return nil
+    end
+  end
+end
+
+ensure_npm_package('vscode-langservers-extracted', npm_root)
 
 require 'lspconfig'.ts_ls.setup {
   init_options = {
     plugins = {
       {
         name = "@vue/typescript-plugin",
-        location = "/home/devise/.local/share/nvm/v22.11.0/lib/node_modules/@vue/typescript-plugin",
-        languages = { "javascript", "typescript", "vue" },
+        location = npm_root .. "/@vue/language-server",
+        languages = { "vue" },
       },
     },
   },
