@@ -9,7 +9,8 @@ vim.opt.foldtext = [[v:lua.vim.treesitter.foldtext()]]
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
-vim.opt.wrap = false
+vim.o.wrap = true
+vim.o.textwidth = 100
 
 -- Enable break indent
 vim.o.breakindent = true

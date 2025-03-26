@@ -38,7 +38,7 @@ require('packer').startup(function(use)
   }
 
 
-  use { -- Autocompletion
+  use {
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   }
@@ -56,14 +56,7 @@ require('packer').startup(function(use)
 
   -- Themes
   use { "catppuccin/nvim", as = "catppuccin" }
-  use {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  }
-  use "sainnhe/everforest"
-  use "EdenEast/nightfox.nvim"
+  use 'arcticicestudio/nord-vim'
 
   use {
     "ThePrimeagen/harpoon",
