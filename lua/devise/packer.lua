@@ -83,6 +83,8 @@ require('packer').startup(function(use)
 
   use 'mrloop/telescope-git-branch.nvim'
 
+  use 'petertriho/nvim-scrollbar'
+
   if is_bootstrap then
     require('packer').sync()
   end

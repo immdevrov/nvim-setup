@@ -10,13 +10,14 @@ vim.opt.foldtext = [[v:lua.vim.treesitter.foldtext()]]
 vim.o.mouse = 'a'
 
 vim.o.wrap = true
-vim.o.textwidth = 100
+vim.o.textwidth = 90
+-- vim.o.colorcolumn = '90'
 
 -- Enable break indent
 vim.o.breakindent = true
 
 -- Save undo history
-vim.o.undofile = true
+vim.o.undofile = false
 vim.o.cmdheight = 0
 
 -- Case insensitive searching UNLESS /C or capital in search
@@ -45,7 +46,7 @@ vim.filetype.add({
     tsx = "typescriptreact",
   },
 })
-vim.o.tabstop = 2 -- A TAB character looks like 4 spaces
+vim.o.tabstop = 2 -- A TAB character looks like 2 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
 vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
