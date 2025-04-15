@@ -94,13 +94,14 @@ local function lastSearch()
   require('telescope.builtin').resume()
 end
 
+
 vim.keymap.set('n', '<leader>sf', project_search, { desc = '[S]ejrch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', word_search, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', grep_search, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sr', require('telescope.builtin').lsp_references, { desc = '[S]earch [R]eferences' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sy', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch s[Y]mbols' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', current_file_word, { desc = '[/] Fuzzily search in current buffer]' })
-vim.keymap.set('n', '<leader>ls', lastSearch, { desc = 'Resume with [L]ast [S]earch' })
-vim.keymap.set('n', '<leader>cc', require('telescope.builtin').colorscheme, { desc = '[C]hange [C]olorscheme' })
+vim.keymap.set('n', '<leader>s/', current_file_word, { desc = '[/] Fuzzily search in current buffer]' })
+vim.keymap.set('n', '<leader>sl', lastSearch, { desc = '[S]earch [L]ast' })
+vim.keymap.set('n', '<leader>sc', require('telescope.builtin').colorscheme, { desc = '[S]earch [C]olorscheme' })

@@ -85,6 +85,8 @@ require('packer').startup(function(use)
 
   use 'petertriho/nvim-scrollbar'
 
+  use  "folke/which-key.nvim"
+
   if is_bootstrap then
     require('packer').sync()
   end
