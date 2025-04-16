@@ -82,7 +82,7 @@ require 'lspconfig'.volar.setup {
 local function ensure_npm_package(package_name, npm_root)
   -- Check if package is installed
   local package_path = npm_root .. '/' .. package_name
-  if vim.fn.isdirectory(package_path) == 0 then
+  if vim.fn.isdirectory(package_path) == false then
     -- Install package if missing
     local install_cmd = 'npm install -g ' .. package_name
     vim.notify('Installing ' .. package_name .. ' globally...', vim.log.levels.INFO)
@@ -101,6 +101,10 @@ local function ensure_npm_package(package_name, npm_root)
   end
 end
 
+ensure_npm_package('typescript@5.8.2', npm_root)
+ensure_npm_package('typescript-language-server@4.3.4', npm_root)
+ensure_npm_package('@vue/language-server@2.2.8', npm_root)
+ensure_npm_package('@vue/typescript-plugin@2.2.8', npm_root)
 ensure_npm_package('vscode-langservers-extracted', npm_root)
 
 require 'lspconfig'.ts_ls.setup {

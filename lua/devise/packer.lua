@@ -33,7 +33,7 @@ require('packer').startup(function(use)
 
   use {
     'prettier/vim-prettier',
-    run = 'yarn install --frozen-lockfile --production',
+    run = 'npm install --frozen-lockfile --production',
     ft = { 'javascript', 'vue', 'json', 'typescript', 'typescriptreact', 'javascriptreact' },
   }
 
