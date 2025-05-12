@@ -34,7 +34,7 @@ vim.opt.scrolloff = 8
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-vim.diagnostic.config({virtual_text = true})
+vim.diagnostic.config({ virtual_text = { current_line = true }})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.tsx",
