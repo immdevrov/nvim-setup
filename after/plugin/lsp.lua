@@ -130,6 +130,23 @@ require 'lspconfig'.ts_ls.setup {
   capabilities = capabilities,
 }
 
+require 'lspconfig'.cssls.setup {
+  filetypes = {
+    "vue",
+    "css",
+  },
+  init_options = { provideFormatter = true }, -- needed to enable formatting capabilities
+  single_file_support = true,
+  settings = {
+    css = { validate = true },
+    scss = { validate = true },
+    less = { validate = true },
+    postcss = { validate = true },
+  },
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 require 'lspconfig'.eslint.setup({
   on_attach = function(_client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
