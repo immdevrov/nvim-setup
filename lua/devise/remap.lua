@@ -31,3 +31,6 @@ vim.keymap.set({'n', 'i'}, '<M-l>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set("x", "<leader>P", "\"_dP")
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+vim.keymap.set('i', '<D-v>', '<C-r>+', { desc = 'Paste from system clipboard' })
+vim.keymap.set('v', '<D-v>', '"+p', { desc = 'Paste from system clipboard' })
