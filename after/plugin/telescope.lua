@@ -96,8 +96,7 @@ local function references()
   }
 end
 
-
-vim.keymap.set('n', '<leader>sf', project_search, { desc = '[S]ejrch [F]iles' })
+vim.keymap.set('n', '<leader>sf', project_search, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', word_search, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', grep_search, { desc = '[S]earch by [G]rep' })

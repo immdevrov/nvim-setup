@@ -14,7 +14,6 @@ require('packer').startup(function(use)
     'neovim/nvim-lspconfig',
     requires = {
       'folke/neodev.nvim',
-      '',
     },
   }
   use 'folke/zen-mode.nvim'
@@ -46,8 +45,14 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   -- Themes
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use 'arcticicestudio/nord-vim'
+  use { "catppuccin/nvim", as = "catppuccin" } -- cool but bluish with red colors
+  use 'arcticicestudio/nord-vim' -- monochromatic enough
+  use 'stevedylandev/darkmatter-nvim' -- no use
+  use 'aliqyan-21/darkvoid.nvim'  -- cool green highlight but me
+  use 'AlexvZyl/nordic.nvim' -- more colors then nord
+  use 'kaiuri/juliana.nvim' -- bright but with red
+  use 'folksoftware/nvim' -- green monochromatic (nord is better)
+
 
   use {
     "ThePrimeagen/harpoon",

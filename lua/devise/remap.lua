@@ -1,4 +1,3 @@
--- Keymaps for better default experience
 vim.g.mapleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
@@ -10,7 +9,6 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- find and replace
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
@@ -25,12 +23,11 @@ vim.keymap.set("n", '<leader>q', vim.cmd.copen)
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set({'n', 'i'}, '<M-h>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set({'n', 'i'}, '<M-l>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'i' }, '<M-h>', '<Nop>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'i' }, '<M-l>', '<Nop>', { noremap = true, silent = true })
 
 vim.keymap.set("x", "<leader>P", "\"_dP")
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set('i', '<D-v>', '<C-r>+', { desc = 'Paste from system clipboard' })
-vim.keymap.set('v', '<D-v>', '"+p', { desc = 'Paste from system clipboard' })
+vim.keymap.set({ 'v', 'n', 'i' }, '<D-v>', '"+p', { desc = 'Paste from system clipboard' })
