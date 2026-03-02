@@ -46,12 +46,8 @@ require('packer').startup(function(use)
 
   -- Themes
   use { "catppuccin/nvim", as = "catppuccin" } -- cool but bluish with red colors
-  use 'arcticicestudio/nord-vim' -- monochromatic enough
-  use 'stevedylandev/darkmatter-nvim' -- no use
-  use 'aliqyan-21/darkvoid.nvim'  -- cool green highlight but me
-  use 'AlexvZyl/nordic.nvim' -- more colors then nord
-  use 'kaiuri/juliana.nvim' -- bright but with red
-  use 'folksoftware/nvim' -- green monochromatic (nord is better)
+  use 'arcticicestudio/nord-vim'               -- monochromatic enough
+  use 'AlexvZyl/nordic.nvim'                   -- more colors then nord
 
 
   use {
@@ -81,7 +77,14 @@ require('packer').startup(function(use)
 
   use 'petertriho/nvim-scrollbar'
 
-  use  "folke/which-key.nvim"
+  use "folke/which-key.nvim"
+
+  use { 'nvim-mini/mini.notify', branch = 'stable' }
+
+  use {
+    "m4xshen/hardtime.nvim",
+    requires = { { "MunifTanjim/nui.nvim" } }
+  }
 
   if is_bootstrap then
     require('packer').sync()
