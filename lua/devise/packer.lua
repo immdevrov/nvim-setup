@@ -40,11 +40,9 @@ require('packer').startup(function(use)
     end,
   }
 
-  -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
 
-  -- Themes
   use { "catppuccin/nvim", as = "catppuccin" } -- cool but bluish with red colors
   use 'arcticicestudio/nord-vim'               -- monochromatic enough
   use 'AlexvZyl/nordic.nvim'                   -- more colors then nord
@@ -80,11 +78,6 @@ require('packer').startup(function(use)
   use "folke/which-key.nvim"
 
   use { 'nvim-mini/mini.notify', branch = 'stable' }
-
-  use {
-    "m4xshen/hardtime.nvim",
-    requires = { { "MunifTanjim/nui.nvim" } }
-  }
 
   if is_bootstrap then
     require('packer').sync()
