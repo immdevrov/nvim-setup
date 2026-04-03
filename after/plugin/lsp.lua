@@ -3,7 +3,6 @@ local on_attach = function(_, bufnr)
     if desc then
       desc = 'LSP: ' .. desc
     end
-
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
@@ -24,76 +23,27 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
-require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require 'lspconfig'.lua_ls.setup {
-  on_init = function(client)
-    if client.workspace_folders then
-      local path = client.workspace_folders[1].name
-      if vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc') then
-        return
-      end
-    end
-
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-      runtime = {
-        version = 'LuaJIT'
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME
-        }
-      }
-    })
-  end,
+vim.lsp.config('*', {
   on_attach = on_attach,
   capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-    },
-  }
-}
+})
+
 local npm_root = vim.fn.trim(vim.fn.system('npm root -g'))
 
-require 'lspconfig'.volar.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  init_options = {
-    typescript = {
-      tsdk = npm_root .. '/typescript/lib'
-    }
-  },
-  on_new_config = function(new_config, new_root_dir)
-    local lib_path = vim.fs.find('node_modules/typescript/lib', { path = new_root_dir, upward = true })[1]
-    if lib_path then
-      new_config.init_options.typescript.tsdk = lib_path
-    end
-  end
-
-}
-
-local function ensure_npm_package(package_name, npm_root)
-  -- Check if package is installed
-  local package_path = npm_root .. '/' .. package_name
-  if vim.fn.isdirectory(package_path) == false then
-    -- Install package if missing
+local function ensure_npm_package(package_name)
+  local bare_name = package_name:match('^(@?[^@]+)')
+  local package_path = npm_root .. '/' .. bare_name
+  if vim.fn.isdirectory(package_path) == 0 then
     local install_cmd = 'npm install -g ' .. package_name
     vim.notify('Installing ' .. package_name .. ' globally...', vim.log.levels.INFO)
-
     local success, result = pcall(vim.fn.system, install_cmd)
     if not success or vim.v.shell_error ~= 0 then
       vim.notify('Failed to install ' .. package_name .. ': ' .. (result or ''), vim.log.levels.ERROR)
       return nil
     end
-
-    -- Verify installation after attempt
     if vim.fn.isdirectory(package_path) == 0 then
       vim.notify(package_name .. ' installation failed', vim.log.levels.ERROR)
       return nil
@@ -101,67 +51,19 @@ local function ensure_npm_package(package_name, npm_root)
   end
 end
 
-ensure_npm_package('typescript@5.8.2', npm_root)
-ensure_npm_package('typescript-language-server@4.3.4', npm_root)
-ensure_npm_package('@vue/language-server@2.2.8', npm_root)
-ensure_npm_package('@vue/typescript-plugin@2.2.8', npm_root)
-ensure_npm_package('vscode-langservers-extracted', npm_root)
+ensure_npm_package('typescript@5.8.2')
+ensure_npm_package('typescript-language-server@4.3.4')
+ensure_npm_package('@vue/language-server@2.2.8')
+ensure_npm_package('@vue/typescript-plugin@2.2.8')
+ensure_npm_package('vscode-langservers-extracted')
 
-require 'lspconfig'.ts_ls.setup {
-  init_options = {
-    plugins = {
-      {
-        name = "@vue/typescript-plugin",
-        location = npm_root .. "/@vue/language-server",
-        languages = { "vue" },
-      },
-    },
-  },
-  filetypes = {
-    "vue",
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
-  },
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-require 'lspconfig'.cssls.setup {
-  filetypes = {
-    "vue",
-    "css",
-  },
-  init_options = { provideFormatter = true }, -- needed to enable formatting capabilities
-  single_file_support = true,
-  settings = {
-    css = { validate = true },
-    scss = { validate = true },
-    less = { validate = true },
-    postcss = { validate = true },
-  },
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-require 'lspconfig'.eslint.setup({
-  on_attach = function(_client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-  capabilities = capabilities,
-})
+vim.lsp.enable({ 'lua_ls', 'vue_ls', 'ts_ls', 'cssls' })
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
+  local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup {
   snippet = {

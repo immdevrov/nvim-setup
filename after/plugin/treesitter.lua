@@ -1,20 +1,13 @@
--- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {
-    'lua', 'typescript', 'vimdoc', 'luadoc', 'jsdoc', 'javascript', 'vue', 'css', 'scss'
-  },
-  highlight = { enable = true },
-  indent = { enable = true },
+-- nvim-treesitter v0.9+ API (incompatible rewrite, requires Neovim 0.12)
+-- Parsers are installed with :TSInstall or programmatically below.
+-- tree-sitter-cli must be in PATH: `brew install tree-sitter`
+require('nvim-treesitter').install({
+  'lua', 'typescript', 'vimdoc', 'luadoc', 'jsdoc', 'javascript', 'vue', 'css', 'scss'
+})
 
-  incremental_selection = {
-    enable = false,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<c-backspace>',
-    },
-  },
-}
+-- Enable treesitter highlighting for all filetypes
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})

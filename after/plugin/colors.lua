@@ -18,5 +18,22 @@ require("catppuccin").setup({
     },
 })
 
-vim.cmd('colorscheme nordic')
+require('jellybeans').setup({
+    transparent = false,
+    italics = false,
+    bold = true,
+    flat_ui = true, -- toggles "flat UI" for pickers
+    background = {
+        dark = "jellybeans",       -- default dark palette
+        light = "jellybeans", -- default light palette
+    },
+    plugins = {
+        all = false,
+        auto = true, -- auto-detect installed plugins via lazy.nvim
+    },
+    on_colors = function(c)
+        c.background = "#000000"
+    end,
+})
+vim.cmd('colorscheme jellybeans')
 
