@@ -6,7 +6,7 @@ return {
   root_markers = { 'package.json', '.git' },
   init_options = {
     typescript = {
-      tsdk = vim.fn.trim(vim.fn.system('npm root -g')) .. '/typescript/lib',
+      tsdk = require('devise.npm').root_g() .. '/typescript/lib',
     },
   },
   on_new_config = function(new_config, new_root_dir)

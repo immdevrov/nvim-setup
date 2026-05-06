@@ -31,7 +31,7 @@ vim.lsp.config('*', {
   capabilities = capabilities,
 })
 
-local npm_root = vim.fn.trim(vim.fn.system('npm root -g'))
+local npm_root = require('devise.npm').root_g()
 
 local function ensure_npm_package(package_name)
   local bare_name = package_name:match('^(@?[^@]+)')
@@ -57,7 +57,34 @@ ensure_npm_package('@vue/language-server@2.2.8')
 ensure_npm_package('@vue/typescript-plugin@2.2.8')
 ensure_npm_package('vscode-langservers-extracted')
 
-vim.lsp.enable({ 'lua_ls', 'vue_ls', 'ts_ls', 'cssls' })
+vim.lsp.enable({ 'lua_ls', 'vue_ls', 'ts_ls', 'cssls', 'eslint' })
+
+local eslint_fix_group = vim.api.nvim_create_augroup('eslint_fix_on_save', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = eslint_fix_group,
+  pattern = { '*.js', '*.jsx', '*.mjs', '*.cjs', '*.ts', '*.tsx', '*.vue' },
+  callback = function(args)
+    local clients = vim.lsp.get_clients({ name = 'eslint', bufnr = args.buf })
+    if #clients == 0 then return end
+
+    local params = vim.lsp.util.make_range_params(0, clients[1].offset_encoding or 'utf-16')
+    params.context = { only = { 'source.fixAll.eslint' }, diagnostics = {} }
+
+    for _, client in ipairs(clients) do
+      local result = client:request_sync('textDocument/codeAction', params, 1500, args.buf)
+      if result and result.result then
+        for _, action in ipairs(result.result) do
+          if action.edit then
+            vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding or 'utf-16')
+          end
+          if type(action.command) == 'table' then
+            client:request_sync('workspace/executeCommand', action.command, 1500, args.buf)
+          end
+        end
+      end
+    end
+  end,
+})
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

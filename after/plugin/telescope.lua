@@ -19,8 +19,11 @@ require('telescope').setup {
     set_env = { ["RG_HIGHLIGHT"] = "false" },
     vimgrep_arguments = {
       "rg",
+      "--color=never",
+      "--no-heading",
       "--with-filename",
       "--line-number",
+      "--column",
       "--ignore-case",
       "--trim",
     },

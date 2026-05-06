@@ -1,4 +1,4 @@
-local npm_root = vim.fn.trim(vim.fn.system('npm root -g'))
+local npm_root = require('devise.npm').root_g()
 return {
   cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {

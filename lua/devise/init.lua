@@ -12,15 +12,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = { '*.tsx', '*.ts', '*.jsx', '*.js', '*.vue' },
-  command = 'Prettier',
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.lua',
   callback = function() vim.lsp.buf.format() end,
 })
 
-vim.api.nvim_create_user_command('W', function ()
+vim.api.nvim_create_user_command('W', function()
   vim.cmd.wall()
 end, {})

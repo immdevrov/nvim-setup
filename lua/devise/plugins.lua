@@ -9,9 +9,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
       vim.system({ 'make' }, { cwd = ev.data.path })
     end
 
-    if name == 'vim-prettier' then
-      vim.system({ 'npm', 'install', '--frozen-lockfile', '--production' }, { cwd = ev.data.path })
-    end
   end,
 })
 
@@ -53,7 +50,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-mini/mini.notify', version = 'stable' },
 
   -- Editing
-  'https://github.com/prettier/vim-prettier',
+  'https://github.com/stevearc/conform.nvim',
   'https://github.com/mfussenegger/nvim-lint',
   'https://github.com/numToStr/Comment.nvim',
   'https://github.com/tpope/vim-sleuth',
